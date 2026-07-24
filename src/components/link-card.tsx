@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { GripVertical, Trash2, ExternalLink } from 'lucide-react'
 import { supabaseBrowser } from '@/lib/supabase'
@@ -26,11 +26,9 @@ export default function LinkCard({ link, onDelete }: { link: any, onDelete: () =
           </div>
         </div>
         <div className="flex gap-2 ml-auto opacity-0 group-hover:opacity-100 transition-all">
-          <Button variant="ghost" size="sm" className="h-8 w-8 p-0" asChild>
-            <a href={link.url} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          </Button>
+          <a href={link.url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-8 w-8 p-0" })}>
+            <ExternalLink className="h-4 w-4" />
+          </a>
           <Button variant="ghost" size="sm" onClick={deleteLink} className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50">
             <Trash2 className="h-4 w-4" />
           </Button>
