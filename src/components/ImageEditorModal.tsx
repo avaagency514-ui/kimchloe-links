@@ -128,7 +128,7 @@ export default function ImageEditorModal({
                         min={1} 
                         max={3} 
                         step={0.1} 
-                        onValueChange={(val) => setZoom(val[0])}
+                        onValueChange={(val) => setZoom(Array.isArray(val) ? val[0] : (val as any)[0] || val)}
                         className="py-2"
                         // Custom styles to avoid "black circles"
                        />
