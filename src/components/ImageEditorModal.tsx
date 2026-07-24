@@ -173,7 +173,7 @@ export default function ImageEditorModal({
                         min={50} 
                         max={150} 
                         step={1} 
-                        onValueChange={(val) => setFilters(f => ({...f, contrast: val[0]}))}
+                        onValueChange={(val) => setFilters(f => ({...f, contrast: Array.isArray(val) ? val[0] : (val as any)[0] || val}))}
                         className="py-2"
                        />
                     </div>
@@ -189,7 +189,7 @@ export default function ImageEditorModal({
                         min={50} 
                         max={150} 
                         step={1} 
-                        onValueChange={(val) => setFilters(f => ({...f, brightness: val[0]}))}
+                        onValueChange={(val) => setFilters(f => ({...f, brightness: Array.isArray(val) ? val[0] : (val as any)[0] || val}))}
                         className="py-2"
                        />
                     </div>
