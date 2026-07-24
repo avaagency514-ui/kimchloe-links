@@ -23,25 +23,8 @@ export async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-is-bot', isBot ? 'true' : 'false')
 
-  if (request.nextUrl.pathname.startsWith('/u/') && !isBot) {
-    const ip = request.headers.get('x-forwarded-for') || request.ip || 'unknown'
-    try {
-      const geoUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/geo-lookup`
-      const geoRes = await fetch(geoUrl, {
-        method: 'POST',
-        headers: {
-          'x-forwarded-for': ip
-        }
-      })
-      if (geoRes.ok) {
-        const geo = await geoRes.json()
-        if(geo.country) requestHeaders.set('x-geo-country', geo.country)
-        if(geo.city) requestHeaders.set('x-geo-city', geo.city)
-      }
-    } catch(e) {
-      console.log('Geo lookup failed:', e)
-    }
-  }
+  // La détection Geo et les requêtes analytics ont été déplacées vers le Cloudflare Worker
+  // pour une exécution à la périphérie (Edge) plus rapide et sans surcharger Netlify/Next.js.
 
   let response = NextResponse.next({
     request: {

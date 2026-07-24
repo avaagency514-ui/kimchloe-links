@@ -1,22 +1,14 @@
 'use client'
 import { motion } from 'framer-motion'
-import { supabaseBrowser } from '@/lib/supabase'
 import { MousePointer } from 'lucide-react'
 
 export default function LinkButton({ link, profileId }: { link: any, profileId: string }) {
-  const supabase = supabaseBrowser()
-
-  const handleClick = async () => {
-    // Note: ensure increment_clicks RPC is safely handling errors if it fails
-    await supabase.rpc('increment_clicks', { link_id: link.id })
-  }
-
+  // La redirection et le compteur de clics sont désormais gérés par le Cloudflare Worker !
   return (
     <motion.a
-      href={link.url}
+      href={`/r/${link.id}`}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={handleClick}
       className="block w-full"
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
